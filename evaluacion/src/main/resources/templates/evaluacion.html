@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Evaluación Física</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/cssl/estilos.css">
+    <style>
+        body {
+            background-color: #fff0f5;
+            font-family: 'Poppins', sans-serif;
+            padding: 30px;
+            color: #333;
+        }
+        h2, h3 {
+            color: #c2185b;
+        }
+        .pregunta {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-left: 6px solid #f48fb1;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        button {
+            background-color: #f06292;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 40px auto 0;
+        }
+        button:hover {
+            background-color: #ec407a;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Evaluación de Física</h2>
+
+<form action="/resultado" method="post">
+    <input type="hidden" name="nombre" th:value="${estudiante.nombre}"/>
+    <input type="hidden" name="documento" th:value="${estudiante.documento}"/>
+
+    <div th:each="pregunta : ${preguntas}" class="pregunta">
+        <h3 th:text="${pregunta.enunciado}">Texto de la pregunta</h3>
+        <label><input type="radio" th:name="${pregunta.id}" value="A" required> A</label>
+        <label><input type="radio" th:name="${pregunta.id}" value="B"> B</label>
+        <label><input type="radio" th:name="${pregunta.id}" value="C"> C</label>
+        <label><input type="radio" th:name="${pregunta.id}" value="D"> D</label>
+    </div>
+
+    <button type="submit">Enviar evaluación</button>
+</form>
+
+</body>
+</html>

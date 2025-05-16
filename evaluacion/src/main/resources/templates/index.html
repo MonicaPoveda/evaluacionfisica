@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Evaluación Física</title>
+    <link rel="stylesheet" href="/cssl/estilos.css">
+</head>
+<body class="fondo">
+<h1>Evaluación de Física</h1>
+<form method="post" action="/evaluar">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" required><br>
+    <label>Documento:</label>
+    <input type="text" name="documento" required><br><br>
+
+    <div th:each="pregunta : ${preguntas}">
+        <p><b th:text="${pregunta.enunciado}"></b></p>
+        <div th:each="opcion, iter : ${pregunta.opciones}">
+            <input type="radio" th:name="'p' + ${pregunta.id}" th:value="${iter.index}" required>
+            <span th:text="${opcion}"></span><br>
+        </div>
+        <hr>
+    </div>
+    <button type="submit">Enviar</button>
+</form>
+</body>
+</html>
